@@ -1,106 +1,823 @@
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Academic profile, research, teaching resources and civil engineering knowledge hub of Dr. Darshankumar Patel.">
-  <meta name="theme-color" content="#102b4e">
+  <meta name="theme-color" content="#0a1f3c">
   <title>Dr. Darshankumar Patel | Civil Engineering Academic Profile</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230a1f3c'/><text x='32' y='44' font-family='Georgia,serif' font-size='28' fill='%23e6c98a' text-anchor='middle'>DP</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    /* Research areas and academic qualifications side-by-side layout */
-    .research-qualification-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-      gap: 32px;
-      align-items: start;
+    /* ============================================================
+       DESIGN TOKENS
+       ============================================================ */
+    :root{
+      --navy-950:#081a33;
+      --navy-900:#0a1f3c;
+      --navy-800:#0f2a4d;
+      --navy-700:#153a68;
+      --gold:#c0902f;
+      --gold-light:#e6c98a;
+      --gold-soft:#f8f1e2;
+      --ink:#101a2b;
+      --slate:#4a5a70;
+      --muted:#6b7a8f;
+      --line:rgba(15,42,77,.12);
+      --bg:#f6f7fa;
+      --white:#ffffff;
+      --radius-lg:22px;
+      --radius:16px;
+      --radius-sm:12px;
+      --shadow-sm:0 1px 2px rgba(10,31,60,.05), 0 10px 24px -18px rgba(10,31,60,.35);
+      --shadow-md:0 24px 48px -28px rgba(10,31,60,.45);
+      --maxw:1160px;
+      --serif:"Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+      --sans:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-    .research-area-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
+
+    /* ============================================================
+       BASE
+       ============================================================ */
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      font-size:16px;
+      line-height:1.7;
+      color:var(--ink);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-    .research-area-list .topic-card {
-      height: 100%;
-      padding: 22px;
+    img{max-width:100%;display:block}
+    a{color:var(--navy-700)}
+    a:hover{color:var(--gold)}
+    :focus-visible{
+      outline:2px solid var(--gold);
+      outline-offset:3px;
+      border-radius:6px;
     }
-    .research-area-list .topic-icon {
-      font-size: 26px;
-      margin-bottom: 10px;
+    section[id]{scroll-margin-top:92px}
+
+    .container{
+      width:min(100% - 2.5rem, var(--maxw));
+      margin-inline:auto;
     }
-    .research-area-list .topic-card h3 {
-      margin-bottom: 8px;
+    .section{padding-block:clamp(56px, 7vw, 96px)}
+    .section-soft{
+      background:linear-gradient(180deg,#eef2f7 0%,#f7f9fc 100%);
+      border-block:1px solid rgba(15,42,77,.06);
     }
-    .research-area-list .topic-card p {
-      margin-bottom: 0;
-      line-height: 1.6;
+    .section-dark{
+      position:relative;
+      overflow:hidden;
+      color:#e8eef7;
+      background:
+        radial-gradient(720px 380px at 85% 0%, rgba(192,144,47,.22), transparent 62%),
+        radial-gradient(620px 380px at 5% 100%, rgba(58,120,196,.28), transparent 60%),
+        linear-gradient(155deg, var(--navy-900) 0%, var(--navy-800) 55%, var(--navy-700) 100%);
     }
-    .qualification-panel {
-      padding: 24px;
-      border-radius: 18px;
-      background: #fff;
-      border: 1px solid rgba(16, 43, 78, 0.12);
-      box-shadow: 0 10px 28px rgba(16, 43, 78, 0.06);
+
+    .skip-link{
+      position:absolute;left:-9999px;top:0;z-index:100;
+      background:var(--navy-900);color:#fff;padding:.7rem 1.1rem;border-radius:0 0 10px 0;
+      font-size:.9rem;text-decoration:none;
     }
-    .qualification-panel h3 {
-      margin-top: 0;
-      margin-bottom: 18px;
+    .skip-link:focus{left:0}
+
+    /* ============================================================
+       TYPOGRAPHY HELPERS
+       ============================================================ */
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:.65rem;
+      margin:0;
+      font-size:.72rem;font-weight:700;
+      letter-spacing:.18em;text-transform:uppercase;
+      color:var(--gold);
     }
-    .qualification-panel .timeline {
-      margin-bottom: 0;
+    .eyebrow::before{
+      content:"";width:26px;height:2px;border-radius:2px;
+      background:currentColor;opacity:.85;
     }
+    .section-heading{max-width:780px;margin-bottom:clamp(28px,4vw,44px)}
+    .section-heading h2{
+      font-family:var(--serif);
+      font-size:clamp(1.65rem, 3vw, 2.35rem);
+      font-weight:600;
+      line-height:1.15;
+      letter-spacing:-.01em;
+      color:var(--navy-900);
+      margin:.55rem 0 .7rem;
+    }
+    .section-heading p{margin:0;color:var(--slate);font-size:1.02rem}
+    .section-dark .section-heading h2,
+    .section-dark h2{color:#fff}
+    .section-dark .section-heading p{color:#c3d3e7}
+
+    /* ============================================================
+       HEADER / NAV
+       ============================================================ */
+    .site-header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:saturate(180%) blur(14px);
+      -webkit-backdrop-filter:saturate(180%) blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      position:relative;
+      display:flex;align-items:center;gap:18px;
+      min-height:76px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:.8rem;
+      text-decoration:none;color:var(--navy-900);
+      font-weight:600;font-size:1rem;line-height:1.2;
+    }
+    .brand:hover{color:var(--navy-900)}
+    .brand-mark{
+      display:grid;place-items:center;
+      width:44px;height:44px;flex:0 0 44px;
+      border-radius:13px;
+      font-family:var(--serif);font-size:1.02rem;font-weight:600;letter-spacing:.02em;
+      color:#f6e6c6;
+      background:linear-gradient(150deg,var(--navy-700),var(--navy-950));
+      box-shadow:0 10px 22px -14px rgba(10,31,60,.9);
+    }
+    .brand-text small{
+      display:block;
+      margin-top:.15rem;
+      font-size:.66rem;font-weight:600;
+      letter-spacing:.14em;text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .nav-links{
+      display:flex;align-items:center;gap:2px;
+      margin-left:auto;
+    }
+    .nav-links a{
+      padding:.5rem .72rem;
+      border-radius:9px;
+      font-size:.875rem;font-weight:500;
+      color:#33445c;text-decoration:none;
+      transition:background-color .16s ease, color .16s ease;
+    }
+    .nav-links a:hover{background:rgba(15,42,77,.07);color:var(--navy-900)}
+    .nav-links a[aria-current="page"]{color:var(--navy-900);font-weight:600}
+
+    .language-select{
+      padding:.48rem .7rem;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background:#fff;
+      font:inherit;font-size:.83rem;font-weight:500;
+      color:var(--navy-800);
+      cursor:pointer;
+      transition:border-color .16s ease, box-shadow .16s ease;
+    }
+    .language-select:hover{border-color:rgba(192,144,47,.55)}
+    .menu-toggle{
+      display:none;
+      align-items:center;justify-content:center;
+      width:44px;height:44px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--navy-900);
+      font-size:1.15rem;line-height:1;
+      cursor:pointer;
+      transition:background-color .16s ease, border-color .16s ease;
+    }
+    .menu-toggle:hover{background:#f1f5fa;border-color:rgba(192,144,47,.5)}
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding-block:clamp(56px, 8vw, 104px) clamp(96px, 11vw, 132px);
+      color:#fff;
+      background:
+        radial-gradient(900px 500px at 8% -12%, rgba(74,138,214,.38), transparent 62%),
+        radial-gradient(760px 440px at 92% -4%, rgba(192,144,47,.26), transparent 58%),
+        linear-gradient(158deg, #081a33 0%, #0d2749 48%, #123a63 100%);
+    }
+    .hero::before{
+      content:"";
+      position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size:64px 64px;
+      mask-image:radial-gradient(circle at 50% 0%, #000 0%, transparent 72%);
+      -webkit-mask-image:radial-gradient(circle at 50% 0%, #000 0%, transparent 72%);
+      pointer-events:none;
+    }
+    .hero-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns:minmax(0,1.35fr) minmax(0,.72fr);
+      gap:clamp(32px, 5vw, 64px);
+      align-items:center;
+    }
+    .hero .eyebrow{color:var(--gold-light)}
+    .hero h1{
+      font-family:var(--serif);
+      font-size:clamp(2.3rem, 5.2vw, 3.9rem);
+      font-weight:600;
+      line-height:1.04;
+      letter-spacing:-.025em;
+      margin:.9rem 0 .5rem;
+      color:#fff;
+    }
+    .role{
+      margin:0;
+      font-size:1.02rem;font-weight:600;letter-spacing:.02em;
+      color:var(--gold-light);
+    }
+    .hero-copy{
+      max-width:60ch;
+      margin:1.15rem 0 0;
+      font-size:1.04rem;
+      color:rgba(226,237,249,.84);
+    }
+    .hero-actions{
+      display:flex;flex-wrap:wrap;gap:.75rem;
+      margin-top:2rem;
+    }
+    .hero-tags{
+      display:flex;flex-wrap:wrap;gap:.55rem;
+      margin:2rem 0 0;padding:0;list-style:none;
+    }
+    .hero-tags li,
+    .hero-tags span{
+      padding:.42rem .9rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.07);
+      font-size:.79rem;font-weight:500;letter-spacing:.02em;
+      color:#d8e5f5;
+    }
+
+    .profile-card{
+      position:relative;
+      padding:34px 28px;
+      border-radius:var(--radius-lg);
+      text-align:center;
+      color:#fff;
+      background:linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      box-shadow:0 34px 70px -36px rgba(0,0,0,.85);
+    }
+    .avatar{
+      display:grid;place-items:center;
+      width:96px;height:96px;margin:0 auto 20px;
+      border-radius:50%;
+      font-family:var(--serif);font-size:2rem;font-weight:600;
+      color:var(--navy-900);
+      background:linear-gradient(145deg,#f7e3bb,var(--gold));
+      box-shadow:0 16px 34px -16px rgba(192,144,47,.95);
+    }
+    .profile-card h2{
+      font-family:var(--serif);
+      font-size:1.35rem;font-weight:600;letter-spacing:-.01em;
+      margin:0 0 .3rem;color:#fff;
+    }
+    .profile-card > p{margin:0;font-size:.92rem;color:rgba(226,237,249,.78)}
+    .profile-card .institution{
+      margin:.9rem 0 1.2rem;
+      font-size:.9rem;line-height:1.6;
+      color:#c8d8ea;
+    }
+    .profile-card a{
+      display:inline-block;
+      font-size:.88rem;font-weight:600;
+      color:var(--gold-light);
+      text-decoration:none;
+      border-bottom:1px solid rgba(230,201,138,.45);
+      padding-bottom:1px;
+      word-break:break-word;
+    }
+    .profile-card a:hover{color:#fff;border-bottom-color:#fff}
+
+    /* ============================================================
+       STATS BAND
+       ============================================================ */
+    .stats-band{position:relative;z-index:2;margin-top:-58px}
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-md);
+      overflow:hidden;
+    }
+    .stats > div{
+      padding:26px 18px;
+      text-align:center;
+      border-right:1px solid var(--line);
+    }
+    .stats > div:last-child{border-right:0}
+    .stats strong{
+      display:block;
+      font-family:var(--serif);
+      font-size:clamp(1.45rem, 2.4vw, 1.9rem);
+      font-weight:600;
+      line-height:1.1;
+      color:var(--navy-800);
+    }
+    .stats span{
+      display:block;margin-top:.45rem;
+      font-size:.79rem;font-weight:500;letter-spacing:.02em;
+      color:var(--muted);
+    }
+    .stats-note{
+      margin:.85rem 0 0;
+      font-size:.74rem;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+    .button{
+      display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+      padding:.78rem 1.4rem;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-family:var(--sans);font-size:.9rem;font-weight:600;letter-spacing:.01em;
+      text-decoration:none;cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease,
+                 color .18s ease, border-color .18s ease;
+    }
+    .button.primary{
+      background:linear-gradient(180deg,var(--navy-700),var(--navy-900));
+      color:#fff;
+      box-shadow:0 14px 26px -16px rgba(10,31,60,.95);
+    }
+    .button.primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 20px 32px -18px rgba(10,31,60,1);
+      color:#fff;
+    }
+    .button.secondary{
+      background:#fff;
+      color:var(--navy-800);
+      border-color:var(--line);
+    }
+    .button.secondary:hover{
+      transform:translateY(-2px);
+      color:var(--navy-900);
+      border-color:rgba(192,144,47,.6);
+      box-shadow:var(--shadow-sm);
+    }
+    /* on dark surfaces */
+    .hero .button.primary{background:#fff;color:var(--navy-900)}
+    .hero .button.primary:hover{background:#fdf8ee}
+    .hero .button.secondary{
+      background:rgba(255,255,255,.07);
+      color:#fff;
+      border-color:rgba(255,255,255,.3);
+    }
+    .hero .button.secondary:hover{background:rgba(255,255,255,.16);color:#fff}
+    .calculator-panel .button.primary{background:#fff;color:var(--navy-900)}
+
+    /* ============================================================
+       ABOUT
+       ============================================================ */
+    .about-profile{
+      max-width:860px;
+      padding:clamp(26px, 3.4vw, 40px);
+      background:#fff;
+      border:1px solid var(--line);
+      border-left:3px solid var(--gold);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+    }
+    .about-profile p{margin:0 0 1rem;color:var(--slate)}
+    .about-profile p:last-child{margin-bottom:0}
+    .about-profile .lead{
+      font-size:clamp(1.08rem, 1.6vw, 1.22rem);
+      font-weight:500;
+      line-height:1.55;
+      color:var(--navy-800);
+    }
+
+    /* ============================================================
+       CARDS
+       ============================================================ */
+    .topic-card{
+      position:relative;
+      padding:26px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .topic-card:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow-md);
+      border-color:rgba(192,144,47,.38);
+    }
+    .topic-icon{
+      display:grid;place-items:center;
+      width:48px;height:48px;
+      margin-bottom:14px;
+      border-radius:13px;
+      font-size:1.28rem;line-height:1;
+      color:var(--navy-800);
+      background:var(--gold-soft);
+      border:1px solid rgba(192,144,47,.22);
+    }
+    .topic-card h3{
+      margin:0 0 .45rem;
+      font-family:var(--sans);
+      font-size:1.03rem;font-weight:650;letter-spacing:-.005em;
+      color:var(--navy-900);
+    }
+    .topic-card p{margin:0;font-size:.93rem;line-height:1.65;color:var(--slate)}
+
+    /* ============================================================
+       RESEARCH + QUALIFICATIONS LAYOUT
+       ============================================================ */
+    .research-qualification-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+      gap:clamp(28px, 4vw, 48px);
+      align-items:start;
+    }
+    .research-area-list{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+    }
+    .research-area-list .topic-card{padding:22px}
+    .research-area-list .topic-icon{font-size:1.15rem;width:42px;height:42px;margin-bottom:10px}
+    .research-area-list .topic-card h3{margin-bottom:.35rem}
+
+    .qualification-panel{
+      padding:clamp(22px, 3vw, 30px);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-sm);
+    }
+    .qualification-panel h3{
+      margin:0 0 1.4rem;
+      font-family:var(--sans);font-size:1.02rem;font-weight:650;
+      color:var(--navy-900);
+    }
+    .timeline{list-style:none;margin:0;padding:0}
+    .timeline li{
+      position:relative;
+      padding:0 0 22px 26px;
+    }
+    .timeline li::before{
+      content:"";
+      position:absolute;left:0;top:7px;
+      width:11px;height:11px;border-radius:50%;
+      background:#fff;border:2px solid var(--gold);
+    }
+    .timeline li::after{
+      content:"";
+      position:absolute;left:5px;top:20px;bottom:0;
+      width:1px;background:rgba(15,42,77,.15);
+    }
+    .timeline li:last-child{padding-bottom:0}
+    .timeline li:last-child::after{display:none}
+    .timeline b{display:block;font-size:.96rem;font-weight:650;color:var(--navy-900)}
+    .timeline span{display:block;margin-top:.15rem;font-size:.85rem;color:var(--muted)}
+
+    /* ============================================================
+       SCHOLAR / SLIDESHARE PANELS
+       ============================================================ */
     .scholar-panel,
-    .slideshare-panel {
-      max-width: 850px;
-      margin: 0 auto;
-      padding: 28px;
+    .slideshare-panel{
+      max-width:860px;
+      margin-inline:auto;
+      padding:clamp(24px, 3.4vw, 38px);
     }
+    .scholar-panel h3,
+    .slideshare-panel h3{
+      font-size:1.22rem;
+      margin-bottom:.5rem;
+    }
+    .scholar-panel > p,
+    .slideshare-panel > p{margin-bottom:1.4rem}
     .scholar-search,
-    .slideshare-search {
-      margin-top: 28px;
-      padding-top: 22px;
-      border-top: 1px solid rgba(16, 43, 78, 0.12);
+    .slideshare-search{
+      margin-top:1.8rem;
+      padding-top:1.6rem;
+      border-top:1px solid var(--line);
     }
+    .scholar-search h3,
+    .slideshare-search h3{font-size:1rem;margin-bottom:.9rem}
     .scholar-search form,
-    .slideshare-search form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
+    .slideshare-search form{
+      display:flex;flex-wrap:wrap;gap:12px;align-items:center;
     }
-    .scholar-search input,
-    .slideshare-search input {
-      flex: 1 1 280px;
-      min-width: 0;
+    .scholar-search input[type="search"],
+    .slideshare-search input[type="search"]{
+      flex:1 1 280px;min-width:0;
     }
-    @media (max-width: 800px) {
-      .research-qualification-layout {
-        grid-template-columns: 1fr;
-        gap: 28px;
+
+    /* ============================================================
+       FORM CONTROLS
+       ============================================================ */
+    input[type="search"],
+    input[type="number"]{
+      width:100%;
+      padding:.78rem 1rem;
+      border-radius:var(--radius-sm);
+      border:1px solid rgba(15,42,77,.18);
+      background:#fff;
+      font:inherit;font-size:.94rem;
+      color:var(--ink);
+      transition:border-color .16s ease, box-shadow .16s ease;
+    }
+    input[type="search"]::placeholder{color:#8b98a9}
+    input[type="search"]:focus,
+    input[type="number"]:focus{
+      outline:none;
+      border-color:var(--gold);
+      box-shadow:0 0 0 3px rgba(192,144,47,.18);
+    }
+
+    /* ============================================================
+       TEACHING CARDS
+       ============================================================ */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(258px, 1fr));
+      gap:20px;
+    }
+    .card-link{
+      display:flex;flex-direction:column;height:100%;
+      color:inherit;text-decoration:none;
+    }
+    .card-link span{
+      margin-top:auto;
+      padding-top:1rem;
+      font-size:.86rem;font-weight:650;
+      color:var(--gold);
+      transition:transform .18s ease;
+    }
+    .card-link:hover span{transform:translateX(4px)}
+
+    /* ============================================================
+       CALCULATOR
+       ============================================================ */
+    .calculator-panel{
+      display:grid;
+      grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+      gap:clamp(24px, 3.5vw, 40px);
+      align-items:center;
+      margin-top:28px;
+      padding:clamp(26px, 3.6vw, 40px);
+      border-radius:var(--radius-lg);
+      color:#fff;
+      background:
+        radial-gradient(520px 260px at 100% 0%, rgba(192,144,47,.22), transparent 60%),
+        linear-gradient(150deg,var(--navy-800),var(--navy-700));
+      box-shadow:var(--shadow-md);
+    }
+    .calculator-panel .eyebrow{color:var(--gold-light)}
+    .calculator-panel h3{
+      margin:.5rem 0 .6rem;
+      font-family:var(--serif);font-size:1.35rem;font-weight:600;color:#fff;
+    }
+    .calculator-panel p{margin:0;font-size:.93rem;color:rgba(226,237,249,.8)}
+    .calc-form{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:14px;
+    }
+    .calc-form label{
+      display:flex;flex-direction:column;gap:.4rem;
+      font-size:.72rem;font-weight:600;
+      letter-spacing:.08em;text-transform:uppercase;
+      color:rgba(226,237,249,.75);
+    }
+    .calc-form label input{font-size:.95rem}
+    .calc-form .button{grid-column:1 / 2;padding-block:.72rem 1rem;align-self:end}
+    .calc-form output{
+      grid-column:2 / -1;
+      display:flex;align-items:center;
+      min-height:46px;
+      padding:.7rem 1rem;
+      border-radius:var(--radius-sm);
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.18);
+      font-size:.95rem;font-weight:600;
+      color:var(--gold-light);
+    }
+
+    /* ============================================================
+       RECOGNITION
+       ============================================================ */
+    .recognition-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:20px;
+    }
+    .recognition-card{
+      display:flex;flex-direction:column;
+      padding:26px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .recognition-card:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow-md);
+      border-color:rgba(192,144,47,.38);
+    }
+    .pill{
+      display:inline-block;
+      align-self:flex-start;
+      padding:.3rem .72rem;
+      border-radius:999px;
+      background:var(--gold-soft);
+      border:1px solid rgba(192,144,47,.28);
+      font-size:.68rem;font-weight:700;
+      letter-spacing:.07em;text-transform:uppercase;
+      color:#8a6120;
+    }
+    .recognition-card h3{
+      margin:.85rem 0 .55rem;
+      font-size:1rem;font-weight:650;line-height:1.4;
+      color:var(--navy-900);
+    }
+    .recognition-card p{margin:0 0 .5rem;font-size:.9rem;color:var(--slate)}
+    .recognition-card p:last-child{margin-bottom:0}
+    .recognition-card a{
+      margin-top:auto;padding-top:.9rem;
+      font-size:.87rem;font-weight:650;
+      color:var(--navy-700);text-decoration:none;
+    }
+    .recognition-card a:hover{color:var(--gold)}
+    .recognition-card .muted{font-size:.82rem;color:var(--muted)}
+
+    /* ============================================================
+       CONTACT
+       ============================================================ */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(0,.85fr);
+      gap:clamp(28px, 4.5vw, 56px);
+      align-items:center;
+    }
+    .contact-grid h2{
+      font-family:var(--serif);
+      font-size:clamp(1.6rem, 3vw, 2.25rem);
+      font-weight:600;line-height:1.15;letter-spacing:-.015em;
+      margin:.55rem 0 .8rem;color:#fff;
+    }
+    .contact-grid > div > p{max-width:56ch;margin:0;color:#c3d3e7}
+    .contact-card{
+      padding:clamp(24px, 3.2vw, 32px);
+      border-radius:var(--radius-lg);
+      background:linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+    }
+    .contact-card p{margin:0 0 .65rem;font-size:.93rem;color:#dbe6f4}
+    .contact-card p:last-child{margin-bottom:0}
+    .contact-card b{color:#fff;font-size:1rem}
+    .contact-card a{
+      color:var(--gold-light);text-decoration:none;
+      border-bottom:1px solid rgba(230,201,138,.35);
+      padding-bottom:1px;
+    }
+    .contact-card a:hover{color:#fff;border-bottom-color:#fff}
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer{
+      background:var(--navy-950);
+      color:#93a7bf;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .footer-inner{
+      display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;
+      align-items:center;justify-content:space-between;
+      padding-block:28px;
+      font-size:.83rem;
+    }
+    .footer a{color:#c9d8ea;text-decoration:none}
+    .footer a:hover{color:var(--gold-light)}
+
+    /* ============================================================
+       SCROLL REVEAL
+       ============================================================ */
+    [data-reveal]{
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.3,1);
+      will-change:opacity, transform;
+    }
+    [data-reveal].revealed{opacity:1;transform:none}
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1040px){
+      .nav-links a{padding:.5rem .55rem;font-size:.84rem}
+    }
+
+    @media (max-width: 980px){
+      .menu-toggle{display:inline-flex;margin-left:auto}
+      .nav-links{
+        position:absolute;
+        top:100%;left:0;right:0;
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        gap:2px;
+        margin-left:0;
+        padding:10px 16px 18px;
+        background:#fff;
+        border-bottom:1px solid var(--line);
+        box-shadow:0 26px 44px -30px rgba(10,31,60,.55);
       }
+      .nav-links.open,
+      .nav-links.active,
+      .nav-links.show{display:flex}
+      .nav-links a{padding:.72rem .8rem;font-size:.92rem}
+      .language-select{margin-left:0}
+
+      .hero-grid{grid-template-columns:1fr;gap:38px}
+      .profile-card{max-width:420px;margin-inline:auto}
+      .research-qualification-layout{grid-template-columns:1fr}
+      .calculator-panel{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
     }
-    @media (max-width: 560px) {
-      .scholar-panel,
-      .slideshare-panel {
-        padding: 20px;
-      }
+
+    @media (max-width: 760px){
+      .stats{grid-template-columns:repeat(2, minmax(0,1fr))}
+      .stats > div:nth-child(2n){border-right:0}
+      .stats > div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+      .stats-band{margin-top:-40px}
+    }
+
+    @media (max-width: 640px){
+      .brand-text small{display:none}
+      .section-heading p{font-size:.97rem}
+      .calc-form{grid-template-columns:1fr}
+      .calc-form .button{grid-column:1 / -1}
+      .calc-form output{grid-column:1 / -1}
       .scholar-search form,
-      .slideshare-search form {
-        align-items: stretch;
+      .slideshare-search form{align-items:stretch}
+      .scholar-search form .button,
+      .slideshare-search form .button{width:100%}
+      .scholar-panel,
+      .slideshare-panel{padding:22px}
+      .footer-inner{justify-content:flex-start}
+    }
+
+    @media (max-width: 480px){
+      .hero-tags li,.hero-tags span{font-size:.74rem;padding:.38rem .75rem}
+      .button{width:100%}
+      .hero-actions .button{width:100%}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{
+        animation-duration:.001ms !important;
+        transition-duration:.001ms !important;
       }
-      .scholar-search form button,
-      .slideshare-search form button {
-        width: 100%;
-      }
+      [data-reveal]{opacity:1;transform:none}
     }
   </style>
 </head>
 <body>
+<a class="skip-link" href="#home">Skip to main content</a>
+
 <header class="site-header">
   <nav class="nav container" aria-label="Main navigation">
-    <a class="brand" href="#home"><span class="brand-mark">DP</span><span>Dr. Darshankumar Patel<small>Academic • Research • Civil Engineering</small></span></a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <a class="brand" href="#home">
+      <span class="brand-mark" aria-hidden="true">DP</span>
+      <span class="brand-text">Dr. Darshankumar Patel<small>Academic • Research • Civil Engineering</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="#about" data-en="About" data-mr="परिचय" data-hi="परिचय">About</a>
       <a href="#research" data-en="Research" data-mr="संशोधन" data-hi="अनुसंधान">Research</a>
@@ -111,191 +828,284 @@
       <a href="#contact" data-en="Contact" data-mr="संपर्क" data-hi="संपर्क">Contact</a>
     </div>
     <select id="languageSelect" class="language-select" aria-label="Select language">
-      <option value="en">English</option><option value="mr">मराठी</option><option value="hi">हिन्दी</option>
+      <option value="en">English</option>
+      <option value="mr">मराठी</option>
+      <option value="hi">हिन्दी</option>
     </select>
   </nav>
 </header>
 
 <main>
-<section class="hero" id="home">
-  <div class="container hero-grid">
-    <div>
-      <p class="eyebrow" data-en="FACULTY PROFILE · CIVIL ENGINEERING" data-mr="प्राध्यापक परिचय · स्थापत्य अभियांत्रिकी" data-hi="संकाय प्रोफ़ाइल · सिविल इंजीनियरिंग">FACULTY PROFILE · CIVIL ENGINEERING</p>
-      <h1>Dr. Darshankumar Patel</h1>
-      <p class="role">Assistant Professor</p>
-      <p class="hero-copy" data-en="Teaching, research and applied innovation across urban planning, transportation planning, GIS mapping, accessibility and sustainable infrastructure." data-mr="नगर नियोजन, वाहतूक नियोजन, GIS मॅपिंग, सुलभता आणि शाश्वत पायाभूत सुविधांमध्ये अध्यापन, संशोधन आणि उपयोजित नवकल्पना." data-hi="शहरी नियोजन, परिवहन नियोजन, GIS मैपिंग, सुगम्यता और सतत अवसंरचना में शिक्षण, अनुसंधान और अनुप्रयुक्त नवाचार।">Teaching, research and applied innovation across urban planning, transportation planning, GIS mapping, accessibility and sustainable infrastructure.</p>
-      <div class="hero-actions">
-        <a class="button primary" href="#publications">Explore Publications</a>
-        <a class="button secondary" href="https://scholar.google.com/citations?user=9vklDj0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar ↗</a>
-      </div>
-      <div class="hero-tags"><span>Urban Planning</span><span>Transportation Planning</span><span>GIS Mapping</span><span>Accessibility Mapping</span></div>
-    </div>
-    <aside class="profile-card">
-      <div class="avatar">DP</div>
-      <h2>Dr. Darshankumar Patel</h2>
-      <p>Assistant Professor</p>
-      <p class="institution">Shri Vile Parle Kelavani Mandal's<br>Institute of Technology, Dhule</p>
-      <a href="mailto:darshptl12354@gmail.com">darshptl12354@gmail.com</a>
-    </aside>
-  </div>
-</section>
-
-<section class="stats container" aria-label="Academic highlights">
-  <div><strong>Ph.D.</strong><span>Doctoral qualification</span></div>
-  <div><strong>25+</strong><span>Research works listed in academic profile</span></div>
-  <div><strong>4</strong><span>Core research domains</span></div>
-  <div><strong>53</strong><span>Google Scholar citations*</span></div>
-</section>
-
-<section class="section container" id="about">
-  <div class="section-heading"><p class="eyebrow">PROFILE</p><h2>About</h2></div>
-  <div class="about-profile">
-    <p class="lead">Dr. Darshankumar Patel is an Assistant Professor in Civil Engineering at Shri Vile Parle Kelavani Mandal's Institute of Technology, Dhule.</p>
-    <p>His academic interests and scholarly work span urban planning, transportation planning, public transport accessibility, GIS mapping, sustainable highways, water resource management, construction materials and technology-enabled education.</p>
-    <p>He completed his Ph.D. in 2026, holds an M.Tech. in Urban Planning from VNIT Nagpur, a PGDM in Business Analytics from IIM Indore and a B.E. in Civil Engineering.</p>
-  </div>
-</section>
-
-<section class="section section-soft" id="research">
-  <div class="container">
-    <div class="research-qualification-layout">
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
       <div>
-        <div class="section-heading">
+        <p class="eyebrow" data-en="Faculty Profile · Civil Engineering" data-mr="प्राध्यापक परिचय · स्थापत्य अभियांत्रिकी" data-hi="संकाय प्रोफ़ाइल · सिविल इंजीनियरिंग">Faculty Profile · Civil Engineering</p>
+        <h1>Dr. Darshankumar Patel</h1>
+        <p class="role">Assistant Professor</p>
+        <p class="hero-copy" data-en="Teaching, research and applied innovation across urban planning, transportation planning, GIS mapping, accessibility and sustainable infrastructure." data-mr="नगर नियोजन, वाहतूक नियोजन, GIS मॅपिंग, सुलभता आणि शाश्वत पायाभूत सुविधांमध्ये अध्यापन, संशोधन आणि उपयोजित नवकल्पना." data-hi="शहरी नियोजन, परिवहन नियोजन, GIS मैपिंग, सुगम्यता और सतत अवसंरचना में शिक्षण, अनुसंधान और अनुप्रयुक्त नवाचार।">Teaching, research and applied innovation across urban planning, transportation planning, GIS mapping, accessibility and sustainable infrastructure.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#publications">Explore Publications</a>
+          <a class="button secondary" href="https://scholar.google.com/citations?user=9vklDj0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar ↗</a>
         </div>
-        <div class="research-area-list">
-          <article class="topic-card">
-            <div class="topic-icon">⌖</div>
-            <h3>Urban &amp; Transportation Planning</h3>
-            <p>Urban development, travel demand modelling, public transport systems and sustainable mobility.</p>
-          </article>
-          <article class="topic-card">
-            <div class="topic-icon">▦</div>
-            <h3>GIS &amp; Accessibility Mapping</h3>
-            <p>Geospatial analysis, educational facility accessibility, spatial planning and mapping.</p>
-          </article>
-          <article class="topic-card">
-            <div class="topic-icon">♻</div>
-            <h3>Sustainable Infrastructure</h3>
-            <p>Green highways, construction materials, plastic waste utilization and sustainable construction.</p>
-          </article>
-          <article class="topic-card">
-            <div class="topic-icon">≈</div>
-            <h3>Water Resources</h3>
-            <p>Water demand, water supply planning, groundwater recharge and water infrastructure management.</p>
-          </article>
-        </div>
+        <ul class="hero-tags">
+          <li>Urban Planning</li>
+          <li>Transportation Planning</li>
+          <li>GIS Mapping</li>
+          <li>Accessibility Mapping</li>
+        </ul>
       </div>
 
-      <div>
-        <div class="section-heading">
-          <p class="eyebrow">ACADEMIC BACKGROUND</p>
-          <h2>Academic Qualifications</h2>
+      <aside class="profile-card" aria-label="Profile summary">
+        <div class="avatar" aria-hidden="true">DP</div>
+        <h2>Dr. Darshankumar Patel</h2>
+        <p>Assistant Professor</p>
+        <p class="institution">Shri Vile Parle Kelavani Mandal's<br>Institute of Technology, Dhule</p>
+        <a href="mailto:darshptl12354@gmail.com">darshptl12354@gmail.com</a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================= STATS ================= -->
+  <section class="stats-band" aria-label="Academic highlights">
+    <div class="container">
+      <div class="stats">
+        <div><strong>Ph.D.</strong><span>Doctoral qualification</span></div>
+        <div><strong>25+</strong><span>Research works listed in academic profile</span></div>
+        <div><strong>4</strong><span>Core research domains</span></div>
+        <div><strong>53</strong><span>Google Scholar citations*</span></div>
+      </div>
+      <p class="stats-note">*Citation counts are indicative and change over time.</p>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section container" id="about">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Profile</p>
+      <h2>About</h2>
+    </div>
+    <div class="about-profile" data-reveal>
+      <p class="lead">Dr. Darshankumar Patel is an Assistant Professor in Civil Engineering at Shri Vile Parle Kelavani Mandal's Institute of Technology, Dhule.</p>
+      <p>His academic interests and scholarly work span urban planning, transportation planning, public transport accessibility, GIS mapping, sustainable highways, water resource management, construction materials and technology-enabled education.</p>
+      <p>He completed his Ph.D. in 2026, holds an M.Tech. in Urban Planning from VNIT Nagpur, a PGDM in Business Analytics from IIM Indore and a B.E. in Civil Engineering.</p>
+    </div>
+  </section>
+
+  <!-- ================= RESEARCH + QUALIFICATIONS ================= -->
+  <section class="section section-soft" id="research">
+    <div class="container">
+      <div class="research-qualification-layout">
+        <div>
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Research</p>
+            <h2>Research Areas</h2>
+          </div>
+          <div class="research-area-list" data-reveal>
+            <article class="topic-card">
+              <div class="topic-icon" aria-hidden="true">⌖</div>
+              <h3>Urban &amp; Transportation Planning</h3>
+              <p>Urban development, travel demand modelling, public transport systems and sustainable mobility.</p>
+            </article>
+            <article class="topic-card">
+              <div class="topic-icon" aria-hidden="true">▦</div>
+              <h3>GIS &amp; Accessibility Mapping</h3>
+              <p>Geospatial analysis, educational facility accessibility, spatial planning and mapping.</p>
+            </article>
+            <article class="topic-card">
+              <div class="topic-icon" aria-hidden="true">♻</div>
+              <h3>Sustainable Infrastructure</h3>
+              <p>Green highways, construction materials, plastic waste utilization and sustainable construction.</p>
+            </article>
+            <article class="topic-card">
+              <div class="topic-icon" aria-hidden="true">≈</div>
+              <h3>Water Resources</h3>
+              <p>Water demand, water supply planning, groundwater recharge and water infrastructure management.</p>
+            </article>
+          </div>
         </div>
-        <div class="qualification-panel">
-          <ul class="timeline">
-            <li><b>Ph.D. – Civil Engineering</b><span>Oriental University, Indore · 2026</span></li>
-            <li><b>PGDM – Integrated Programme in Business Analytics</b><span>IIM Indore · 2021</span></li>
-            <li><b>M.Tech. – Urban Planning</b><span>VNIT Nagpur · 2017 · 8.63 CGPA</span></li>
-            <li><b>B.E. – Civil Engineering</b><span>Amrutvahini College of Engineering / SPPU · 2014</span></li>
-          </ul>
+
+        <div>
+          <div class="section-heading" data-reveal>
+            <p class="eyebrow">Academic Background</p>
+            <h2>Academic Qualifications</h2>
+          </div>
+          <div class="qualification-panel" data-reveal>
+            <h3>Education timeline</h3>
+            <ul class="timeline">
+              <li><b>Ph.D. – Civil Engineering</b><span>Oriental University, Indore · 2026</span></li>
+              <li><b>PGDM – Integrated Programme in Business Analytics</b><span>IIM Indore · 2021</span></li>
+              <li><b>M.Tech. – Urban Planning</b><span>VNIT Nagpur · 2017 · 8.63 CGPA</span></li>
+              <li><b>B.E. – Civil Engineering</b><span>Amrutvahini College of Engineering / SPPU · 2014</span></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section container" id="publications">
-  <div class="section-heading">
-    <p class="eyebrow">RESEARCH &amp; ACADEMIC CONTRIBUTIONS</p>
-    <h2>Selected Publications</h2>
-    <p>Explore research publications, conference papers and academic contributions in Civil Engineering, Urban Planning, Transportation Planning, Water Management and Sustainable Development.</p>
-  </div>
-  <div class="topic-card scholar-panel">
-    <div class="topic-icon">📚</div>
-    <h3>Explore My Google Scholar Profile</h3>
-    <p>Access the complete list of research publications, citation metrics, co-authored papers and academic contributions through my Google Scholar profile.</p>
-    <a class="button primary" href="https://scholar.google.com/citations?user=9vklDj0AAAAJ&amp;hl=en" target="_blank" rel="noopener">View Complete Google Scholar Profile ↗</a>
-    <div class="scholar-search">
-      <h3>Search Research Publications</h3>
-      <form action="https://scholar.google.com/scholar" method="get" target="_blank">
-        <input type="hidden" name="hl" value="en">
-        <input type="search" name="q" placeholder="Search publications, e.g. Transportation Accessibility, Water Management..." aria-label="Search research publications" required>
-        <button class="button secondary" type="submit">Search Google Scholar ↗</button>
-      </form>
+  <!-- ================= PUBLICATIONS ================= -->
+  <section class="section container" id="publications">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Research &amp; Academic Contributions</p>
+      <h2>Selected Publications</h2>
+      <p>Explore research publications, conference papers and academic contributions in Civil Engineering, Urban Planning, Transportation Planning, Water Management and Sustainable Development.</p>
     </div>
-  </div>
-</section>
 
-<section class="section section-soft" id="teaching">
-  <div class="container">
-    <div class="section-heading"><p class="eyebrow">TEACHING &amp; LEARNING</p><h2>Civil Engineering Knowledge Hub</h2><p>A growing collection of learning resources, practical guidance and interactive tools for students.</p></div>
-    <div class="cards">
-      <a class="topic-card card-link" href="resources/transportation-planning.html"><div class="topic-icon">🚦</div><h3>Transportation Planning</h3><p>Urban transport, traffic engineering, travel demand and accessibility.</p><span>Open subject page →</span></a>
-      <a class="topic-card card-link" href="resources/urban-planning.html"><div class="topic-icon">🏙</div><h3>Urban Planning</h3><p>Land use, urban development, planning principles and city systems.</p><span>Open subject page →</span></a>
-      <a class="topic-card card-link" href="resources/gis-mapping.html"><div class="topic-icon">🌐</div><h3>GIS &amp; Mapping</h3><p>Geospatial concepts, mapping workflows and accessibility analysis.</p><span>Open subject page →</span></a>
-      <a class="topic-card card-link" href="resources/construction-materials.html"><div class="topic-icon">🧱</div><h3>Construction Materials</h3><p>Concrete, sustainable materials and construction technology.</p><span>Open subject page →</span></a>
-      <a class="topic-card card-link" href="resources/environmental-engineering.html"><div class="topic-icon">💧</div><h3>Environmental Engineering</h3><p>Environmental pollution, water quality, wastewater treatment, solid waste management and environmental sustainability.</p><span>Open subject page →</span></a>
-      <a class="topic-card card-link" href="resources/practicals.html"><div class="topic-icon">📐</div><h3>Practicals &amp; Projects</h3><p>Field work, lab activities, project guidance and technical demonstrations.</p><span>Open subject page →</span></a>
-    </div>
-    <div class="calculator-panel">
-      <div><p class="eyebrow">QUICK TOOL</p><h3>Concrete volume calculator</h3><p>Calculate rectangular concrete volume from length, breadth and depth.</p></div>
-      <form id="volumeForm" class="calc-form">
-        <label>Length (m)<input id="length" type="number" min="0" step="any" value="5" required></label>
-        <label>Breadth (m)<input id="breadth" type="number" min="0" step="any" value="3" required></label>
-        <label>Depth (m)<input id="depth" type="number" min="0" step="any" value="0.15" required></label>
-        <button class="button primary" type="submit">Calculate</button>
-        <output id="volumeResult" aria-live="polite">Volume: 2.25 m³</output>
-      </form>
-    </div>
-  </div>
-</section>
+    <div class="topic-card scholar-panel" data-reveal>
+      <div class="topic-icon" aria-hidden="true">📚</div>
+      <h3>Explore My Google Scholar Profile</h3>
+      <p>Access the complete list of research publications, citation metrics, co-authored papers and academic contributions through my Google Scholar profile.</p>
+      <a class="button primary" href="https://scholar.google.com/citations?user=9vklDj0AAAAJ&amp;hl=en" target="_blank" rel="noopener">View Complete Google Scholar Profile ↗</a>
 
-<section class="section container" id="recognition">
-  <div class="section-heading"><p class="eyebrow">PROFESSIONAL DEVELOPMENT</p><h2>Recognition &amp; Certificates</h2></div>
-  <div class="recognition-grid">
-    <article class="recognition-card"><span class="pill">FDP · August 2026</span><h3>Emerging Technologies in Sustainable Concrete, Digital Construction and Seismic-Resilient Infrastructure</h3><p>One-Week National Level Faculty Development Programme, Department of Civil Engineering, R. C. Patel Institute of Technology, Shirpur · 17–21 August 2026.</p><a href="assets/fdp-participation-certificate.png" target="_blank" rel="noopener">View participation certificate ↗</a></article>
-    <article class="recognition-card"><span class="pill">AICTE Recognized FDP · August 2026</span><h3>AI Tools for Teaching and Learning</h3><p>NITTTR Chandigarh · 17–21 August 2026 · Certificate No. ICT-4457/26.</p><p class="muted">Certificate details are based on the supplied PDF. Add the original PDF to this section if you want it downloadable from the public website.</p></article>
-    <article class="recognition-card"><span class="pill">Intellectual Property</span><h3>Published IP records listed in faculty profile</h3><p>Portable Carbon Capture and Storage Technology for Sustainable Construction Practices (2024); Water Resource Management Device (2026).</p></article>
-  </div>
-</section>
-
-<section class="section section-soft" id="presentations">
-  <div class="container">
-    <div class="section-heading">
-      <p class="eyebrow">PRESENTATIONS &amp; LECTURE MATERIAL</p>
-      <h2>SlideShare Presentations</h2>
-      <p>Explore teaching presentations, lecture notes and academic learning materials covering Machine Learning, Civil Engineering, Highway Engineering, Building Construction, Urban Planning, GIS, Water Resources and Sustainability.</p>
-    </div>
-    <div class="topic-card slideshare-panel">
-      <div class="topic-icon">📊</div>
-      <h3>Explore My SlideShare Profile</h3>
-      <p>Access academic presentations, lecture materials and educational resources published on SlideShare.</p>
-      <a class="button primary" href="https://www.slideshare.net/DarshPatel8/slideshows" target="_blank" rel="noopener">View All Presentations on SlideShare ↗</a>
-      <div class="slideshare-search">
-        <h3>Search Presentations</h3>
-        <form action="https://www.google.com/search" method="get" target="_blank" onsubmit="this.q.value='site:slideshare.net/DarshPatel8 ' + this.searchTerm.value">
-          <input type="hidden" name="q" value="">
-          <input type="search" name="searchTerm" placeholder="Search Machine Learning, Highway Engineering, GIS..." aria-label="Search SlideShare presentations" required>
-          <button class="button secondary" type="submit">Search ↗</button>
+      <div class="scholar-search">
+        <h3>Search Research Publications</h3>
+        <form action="https://scholar.google.com/scholar" method="get" target="_blank">
+          <input type="hidden" name="hl" value="en">
+          <input type="search" name="q" placeholder="Search publications, e.g. Transportation Accessibility, Water Management..." aria-label="Search research publications" required>
+          <button class="button secondary" type="submit">Search Google Scholar ↗</button>
         </form>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section section-dark" id="contact">
-  <div class="container contact-grid">
-    <div><p class="eyebrow">GET IN TOUCH</p><h2>Academic collaboration &amp; student support</h2><p>For academic queries, research collaboration, teaching resources and professional communication, please use the contact details below.</p></div>
-    <div class="contact-card">
-      <p><b>Dr. Darshankumar Patel</b></p>
-      <p>Assistant Professor<br>SVKM's Institute of Technology, Dhule</p>
-      <p><a href="mailto:darshptl12354@gmail.com">darshptl12354@gmail.com</a></p>
-      <p><a href="https://www.linkedin.com/in/dr-darshankumar-patel-93b9297b/" target="_blank" rel="noopener">LinkedIn profile ↗</a></p>
-      <p><a href="https://www.researchgate.net/profile/Darshankumar-Patel-4" target="_blank" rel="noopener">ResearchGate ↗</a></p>
-      <p><a href="https://scholar.google.com/citations?user=9vklDj0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar ↗</a></p>
+  <!-- ================= TEACHING ================= -->
+  <section class="section section-soft" id="teaching">
+    <div class="container">
+      <div class="section-heading" data-reveal>
+        <p class="eyebrow">Teaching &amp; Learning</p>
+        <h2>Civil Engineering Knowledge Hub</h2>
+        <p>A growing collection of learning resources, practical guidance and interactive tools for students.</p>
+      </div>
+
+      <div class="cards" data-reveal>
+        <a class="topic-card card-link" href="resources/transportation-planning.html">
+          <div class="topic-icon" aria-hidden="true">🚦</div>
+          <h3>Transportation Planning</h3>
+          <p>Urban transport, traffic engineering, travel demand and accessibility.</p>
+          <span>Open subject page →</span>
+        </a>
+        <a class="topic-card card-link" href="resources/urban-planning.html">
+          <div class="topic-icon" aria-hidden="true">🏙</div>
+          <h3>Urban Planning</h3>
+          <p>Land use, urban development, planning principles and city systems.</p>
+          <span>Open subject page →</span>
+        </a>
+        <a class="topic-card card-link" href="resources/gis-mapping.html">
+          <div class="topic-icon" aria-hidden="true">🌐</div>
+          <h3>GIS &amp; Mapping</h3>
+          <p>Geospatial concepts, mapping workflows and accessibility analysis.</p>
+          <span>Open subject page →</span>
+        </a>
+        <a class="topic-card card-link" href="resources/construction-materials.html">
+          <div class="topic-icon" aria-hidden="true">🧱</div>
+          <h3>Construction Materials</h3>
+          <p>Concrete, sustainable materials and construction technology.</p>
+          <span>Open subject page →</span>
+        </a>
+        <a class="topic-card card-link" href="resources/environmental-engineering.html">
+          <div class="topic-icon" aria-hidden="true">💧</div>
+          <h3>Environmental Engineering</h3>
+          <p>Environmental pollution, water quality, wastewater treatment, solid waste management and environmental sustainability.</p>
+          <span>Open subject page →</span>
+        </a>
+        <a class="topic-card card-link" href="resources/practicals.html">
+          <div class="topic-icon" aria-hidden="true">📐</div>
+          <h3>Practicals &amp; Projects</h3>
+          <p>Field work, lab activities, project guidance and technical demonstrations.</p>
+          <span>Open subject page →</span>
+        </a>
+      </div>
+
+      <div class="calculator-panel" data-reveal>
+        <div>
+          <p class="eyebrow">Quick Tool</p>
+          <h3>Concrete volume calculator</h3>
+          <p>Calculate rectangular concrete volume from length, breadth and depth.</p>
+        </div>
+        <form id="volumeForm" class="calc-form">
+          <label>Length (m)<input id="length" type="number" min="0" step="any" value="5" required></label>
+          <label>Breadth (m)<input id="breadth" type="number" min="0" step="any" value="3" required></label>
+          <label>Depth (m)<input id="depth" type="number" min="0" step="any" value="0.15" required></label>
+          <button class="button primary" type="submit">Calculate</button>
+          <output id="volumeResult" aria-live="polite">Volume: 2.25 m³</output>
+        </form>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- ================= RECOGNITION ================= -->
+  <section class="section container" id="recognition">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Professional Development</p>
+      <h2>Recognition &amp; Certificates</h2>
+    </div>
+    <div class="recognition-grid" data-reveal>
+      <article class="recognition-card">
+        <span class="pill">FDP · August 2026</span>
+        <h3>Emerging Technologies in Sustainable Concrete, Digital Construction and Seismic-Resilient Infrastructure</h3>
+        <p>One-Week National Level Faculty Development Programme, Department of Civil Engineering, R. C. Patel Institute of Technology, Shirpur · 17–21 August 2026.</p>
+        <a href="assets/fdp-participation-certificate.png" target="_blank" rel="noopener">View participation certificate ↗</a>
+      </article>
+      <article class="recognition-card">
+        <span class="pill">AICTE Recognized FDP · August 2026</span>
+        <h3>AI Tools for Teaching and Learning</h3>
+        <p>NITTTR Chandigarh · 17–21 August 2026 · Certificate No. ICT-4457/26.</p>
+        <p class="muted">Certificate details are based on the supplied PDF. Add the original PDF to this section if you want it downloadable from the public website.</p>
+      </article>
+      <article class="recognition-card">
+        <span class="pill">Intellectual Property</span>
+        <h3>Published IP records listed in faculty profile</h3>
+        <p>Portable Carbon Capture and Storage Technology for Sustainable Construction Practices (2024); Water Resource Management Device (2026).</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= PRESENTATIONS ================= -->
+  <section class="section section-soft" id="presentations">
+    <div class="container">
+      <div class="section-heading" data-reveal>
+        <p class="eyebrow">Presentations &amp; Lecture Material</p>
+        <h2>SlideShare Presentations</h2>
+        <p>Explore teaching presentations, lecture notes and academic learning materials covering Machine Learning, Civil Engineering, Highway Engineering, Building Construction, Urban Planning, GIS, Water Resources and Sustainability.</p>
+      </div>
+
+      <div class="topic-card slideshare-panel" data-reveal>
+        <div class="topic-icon" aria-hidden="true">📊</div>
+        <h3>Explore My SlideShare Profile</h3>
+        <p>Access academic presentations, lecture materials and educational resources published on SlideShare.</p>
+        <a class="button primary" href="https://www.slideshare.net/DarshPatel8/slideshows" target="_blank" rel="noopener">View All Presentations on SlideShare ↗</a>
+
+        <div class="slideshare-search">
+          <h3>Search Presentations</h3>
+          <form action="https://www.google.com/search" method="get" target="_blank" onsubmit="this.q.value='site:slideshare.net/DarshPatel8 ' + this.searchTerm.value">
+            <input type="hidden" name="q" value="">
+            <input type="search" name="searchTerm" placeholder="Search Machine Learning, Highway Engineering, GIS..." aria-label="Search SlideShare presentations" required>
+            <button class="button secondary" type="submit">Search ↗</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section section-dark" id="contact">
+    <div class="container contact-grid">
+      <div data-reveal>
+        <p class="eyebrow">Get in Touch</p>
+        <h2>Academic collaboration &amp; student support</h2>
+        <p>For academic queries, research collaboration, teaching resources and professional communication, please use the contact details below.</p>
+      </div>
+      <div class="contact-card" data-reveal>
+        <p><b>Dr. Darshankumar Patel</b></p>
+        <p>Assistant Professor<br>SVKM's Institute of Technology, Dhule</p>
+        <p><a href="mailto:darshptl12354@gmail.com">darshptl12354@gmail.com</a></p>
+        <p><a href="https://www.linkedin.com/in/dr-darshankumar-patel-93b9297b/" target="_blank" rel="noopener">LinkedIn profile ↗</a></p>
+        <p><a href="https://www.researchgate.net/profile/Darshankumar-Patel-4" target="_blank" rel="noopener">ResearchGate ↗</a></p>
+        <p><a href="https://scholar.google.com/citations?user=9vklDj0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar ↗</a></p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
@@ -305,11 +1115,28 @@
     <a href="#home">Back to top ↑</a>
   </div>
 </footer>
+
+<script>
+  /* Progressive scroll-reveal — purely presentational, safe to fail. */
+  (function () {
+    var items = document.querySelectorAll('[data-reveal]');
+    if (!items.length) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('revealed'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el) { observer.observe(el); });
+  })();
+</script>
 <script src="script.js"></script>
 </body>
 </html>
-'''
-
-path = Path("/mnt/data/index.html")
-path.write_text(html, encoding="utf-8")
-print(f"Created {path} ({len(html):,} characters, {len(html.splitlines())} lines)")
