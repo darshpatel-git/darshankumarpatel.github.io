@@ -310,43 +310,70 @@
     }
     .profile-card a:hover{color:#fff;border-bottom-color:#fff}
 
-    /* ============================================================
-       STATS BAND
+       /* ============================================================
+       ACHIEVEMENTS BAND
        ============================================================ */
-    .stats-band{position:relative;z-index:2;margin-top:-58px}
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
+    .achievements-band{position:relative;z-index:2;margin-top:-58px}
+
+    .achievements-panel{
+      padding:clamp(22px, 3vw, 32px);
       background:#fff;
       border:1px solid var(--line);
       border-radius:var(--radius-lg);
       box-shadow:var(--shadow-md);
-      overflow:hidden;
     }
-    .stats > div{
-      padding:26px 18px;
+    .achievements-header{
+      display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+      gap:12px;margin-bottom:22px;
+    }
+    .achievements-header h2{
+      margin:.35rem 0 0;
+      font-family:var(--serif);
+      font-size:clamp(1.3rem, 2.2vw, 1.7rem);
+      font-weight:600;line-height:1.15;letter-spacing:-.01em;
+      color:var(--navy-900);
+    }
+
+    .achievement-grid{
+      display:grid;
+      grid-template-columns:repeat(7, minmax(0,1fr));
+      gap:12px;
+    }
+    .achievement-card{
+      position:relative;
+      padding:18px 14px 16px;
+      border-radius:14px;
       text-align:center;
-      border-right:1px solid var(--line);
+      background:linear-gradient(180deg,#fbfcfe 0%,#f3f6fa 100%);
+      border:1px solid var(--line);
+      overflow:hidden;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
-    .stats > div:last-child{border-right:0}
-    .stats strong{
+    .achievement-card::before{
+      content:"";
+      position:absolute;inset:0 0 auto;
+      height:3px;
+      background:linear-gradient(90deg,var(--gold),var(--gold-light));
+      opacity:.55;
+      transition:opacity .2s ease;
+    }
+    .achievement-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(192,144,47,.38);
+      box-shadow:var(--shadow-sm);
+    }
+    .achievement-card:hover::before{opacity:1}
+    .achievement-card strong{
       display:block;
       font-family:var(--serif);
-      font-size:clamp(1.45rem, 2.4vw, 1.9rem);
-      font-weight:600;
-      line-height:1.1;
+      font-size:clamp(1.4rem, 2.4vw, 1.9rem);
+      font-weight:600;line-height:1.1;letter-spacing:-.02em;
       color:var(--navy-800);
     }
-    .stats span{
+    .achievement-card span{
       display:block;margin-top:.45rem;
-      font-size:.79rem;font-weight:500;letter-spacing:.02em;
+      font-size:.68rem;font-weight:500;line-height:1.45;
       color:var(--muted);
-    }
-    .stats-note{
-      margin:.85rem 0 0;
-      font-size:.74rem;
-      color:var(--muted);
-      text-align:center;
     }
 
     /* ============================================================
@@ -770,11 +797,17 @@
       .contact-grid{grid-template-columns:1fr}
     }
 
+       @media (max-width: 1040px){
+      .achievement-grid{grid-template-columns:repeat(4, minmax(0,1fr))}
+    }
     @media (max-width: 760px){
-      .stats{grid-template-columns:repeat(2, minmax(0,1fr))}
-      .stats > div:nth-child(2n){border-right:0}
-      .stats > div:nth-child(-n+2){border-bottom:1px solid var(--line)}
-      .stats-band{margin-top:-40px}
+      .achievements-band{margin-top:-40px}
+      .achievement-grid{grid-template-columns:repeat(3, minmax(0,1fr))}
+    }
+    @media (max-width: 560px){
+      .achievement-grid{grid-template-columns:repeat(2, minmax(0,1fr));gap:10px}
+      .achievement-card{padding:16px 10px 14px}
+      .achievement-card span{font-size:.64rem}
     }
 
     @media (max-width: 640px){
@@ -866,16 +899,48 @@
     </div>
   </section>
 
-  <!-- ================= STATS ================= -->
-  <section class="stats-band" aria-label="Academic highlights">
+   <!-- ================= ACHIEVEMENTS ================= -->
+  <section class="achievements-band" aria-labelledby="achievements-title">
     <div class="container">
-      <div class="stats">
-        <div><strong>Ph.D.</strong><span>Doctoral qualification</span></div>
-        <div><strong>25+</strong><span>Research works listed in academic profile</span></div>
-        <div><strong>4</strong><span>Core research domains</span></div>
-        <div><strong>53</strong><span>Google Scholar citations*</span></div>
+      <div class="achievements-panel">
+        <div class="achievements-header">
+          <div>
+            <p class="eyebrow">Achievements</p>
+            <h2 id="achievements-title">Academic &amp; Professional Milestones</h2>
+          </div>
+        </div>
+
+        <div class="achievement-grid">
+          <div class="achievement-card">
+            <strong>46</strong>
+            <span>FDP / STTP / Workshop / Seminar / Training / Conference Attended</span>
+          </div>
+          <div class="achievement-card">
+            <strong>02</strong>
+            <span>No. of Patents &amp; Copyrights</span>
+          </div>
+          <div class="achievement-card">
+            <strong>05</strong>
+            <span>Total No. of Books / Book Chapters</span>
+          </div>
+          <div class="achievement-card">
+            <strong>25+</strong>
+            <span>No. of Paper Publications in Conference / Journals</span>
+          </div>
+          <div class="achievement-card">
+            <strong>21</strong>
+            <span>Certification Courses Attended</span>
+          </div>
+          <div class="achievement-card">
+            <strong>12</strong>
+            <span>No. of Activities Organized</span>
+          </div>
+          <div class="achievement-card">
+            <strong>22</strong>
+            <span>Certification Count</span>
+          </div>
+        </div>
       </div>
-      <p class="stats-note">*Citation counts are indicative and change over time.</p>
     </div>
   </section>
 
