@@ -419,7 +419,6 @@
       border-color:rgba(255,255,255,.3);
     }
     .hero .button.secondary:hover{background:rgba(255,255,255,.16);color:#fff}
-    .calculator-panel .button.primary{background:#fff;color:var(--navy-900)}
 
     /* ============================================================
        ABOUT
@@ -538,54 +537,6 @@
     .card-link:hover span{transform:translateX(4px)}
 
     /* ============================================================
-       CALCULATOR
-       ============================================================ */
-    .calculator-panel{
-      display:grid;
-      grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
-      gap:clamp(24px, 3.5vw, 40px);
-      align-items:center;
-      margin-top:28px;
-      padding:clamp(26px, 3.6vw, 40px);
-      border-radius:var(--radius-lg);
-      color:#fff;
-      background:
-        radial-gradient(520px 260px at 100% 0%, rgba(192,144,47,.22), transparent 60%),
-        linear-gradient(150deg,var(--navy-800),var(--navy-700));
-      box-shadow:var(--shadow-md);
-    }
-    .calculator-panel .eyebrow{color:var(--gold-light)}
-    .calculator-panel h3{
-      margin:.5rem 0 .6rem;
-      font-family:var(--serif);font-size:1.35rem;font-weight:600;color:#fff;
-    }
-    .calculator-panel p{margin:0;font-size:.93rem;color:rgba(226,237,249,.8)}
-    .calc-form{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:14px;
-    }
-    .calc-form label{
-      display:flex;flex-direction:column;gap:.4rem;
-      font-size:.72rem;font-weight:600;
-      letter-spacing:.08em;text-transform:uppercase;
-      color:rgba(226,237,249,.75);
-    }
-    .calc-form label input{font-size:.95rem}
-    .calc-form .button{grid-column:1 / 2;padding-block:.72rem 1rem;align-self:end}
-    .calc-form output{
-      grid-column:2 / -1;
-      display:flex;align-items:center;
-      min-height:46px;
-      padding:.7rem 1rem;
-      border-radius:var(--radius-sm);
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.18);
-      font-size:.95rem;font-weight:600;
-      color:var(--gold-light);
-    }
-
-    /* ============================================================
        CONTACT
        ============================================================ */
     .contact-grid{
@@ -677,7 +628,6 @@
 
       .hero-grid{grid-template-columns:1fr;gap:38px}
       .profile-card{max-width:420px;margin-inline:auto}
-      .calculator-panel{grid-template-columns:1fr}
       .contact-grid{grid-template-columns:1fr}
     }
 
@@ -697,9 +647,6 @@
     @media (max-width: 640px){
       .brand-text small{display:none}
       .section-heading p{font-size:.97rem}
-      .calc-form{grid-template-columns:1fr}
-      .calc-form .button{grid-column:1 / -1}
-      .calc-form output{grid-column:1 / -1}
       .scholar-panel,
       .slideshare-panel{padding:22px}
       .footer-inner{justify-content:flex-start}
@@ -735,6 +682,7 @@
       <a href="#about" data-en="About" data-mr="परिचय" data-hi="परिचय">About</a>
       <a href="#publications" data-en="Publications" data-mr="प्रकाशने" data-hi="प्रकाशन">Publications</a>
       <a href="#teaching" data-en="Teaching" data-mr="अध्यापन" data-hi="शिक्षण">Teaching</a>
+      <a href="#dbatu-papers" data-en="DBATU Papers" data-mr="DBATU प्रश्नपत्रिका" data-hi="DBATU प्रश्नपत्र">DBATU Papers</a>
       <a href="#presentations">Presentations</a>
       <a href="#contact" data-en="Contact" data-mr="संपर्क" data-hi="संपर्क">Contact</a>
     </div>
@@ -904,21 +852,22 @@
           <span>Open subject page →</span>
         </a>
       </div>
+    </div>
+  </section>
 
-      <div class="calculator-panel" data-reveal>
-        <div>
-          <p class="eyebrow">Quick Tool</p>
-          <h3>Concrete volume calculator</h3>
-          <p>Calculate rectangular concrete volume from length, breadth and depth.</p>
-        </div>
-        <form id="volumeForm" class="calc-form">
-          <label>Length (m)<input id="length" type="number" min="0" step="any" value="5" required></label>
-          <label>Breadth (m)<input id="breadth" type="number" min="0" step="any" value="3" required></label>
-          <label>Depth (m)<input id="depth" type="number" min="0" step="any" value="0.15" required></label>
-          <button class="button primary" type="submit">Calculate</button>
-          <output id="volumeResult" aria-live="polite">Volume: 2.25 m³</output>
-        </form>
-      </div>
+  <!-- ================= DBATU QUESTION PAPERS ================= -->
+  <section class="section container" id="dbatu-papers">
+    <div class="section-heading" data-reveal>
+      <p class="eyebrow">Question Papers</p>
+      <h2>BATU (DBATU) B.Tech CE Question Papers</h2>
+      <p>Semester-wise question papers for B.Tech Civil Engineering under Dr. Babasaheb Ambedkar Technological University (DBATU).</p>
+    </div>
+
+    <div class="topic-card scholar-panel" data-reveal>
+      <div class="topic-icon" aria-hidden="true">📄</div>
+      <h3>Browse DBATU B.Tech CE Question Papers</h3>
+      <p>Access the complete, semester-wise collection of B.Tech Civil Engineering question papers for Dr. Babasaheb Ambedkar Technological University (DBATU) on batuonline.com.</p>
+      <a class="button primary" href="https://www.batuonline.com/btech-ce-question-papers.html#semester" target="_blank" rel="noopener">View Question Papers on batuonline.com ↗</a>
     </div>
   </section>
 
