@@ -203,7 +203,7 @@
     .hero{
       position:relative;
       overflow:hidden;
-      padding-block:clamp(56px, 8vw, 104px);
+      padding-block:clamp(64px, 9vw, 112px) clamp(64px, 8vw, 96px);
       color:#fff;
       background:
         radial-gradient(900px 500px at 8% -12%, rgba(74,138,214,.38), transparent 62%),
@@ -221,8 +221,19 @@
       -webkit-mask-image:radial-gradient(circle at 50% 0%, #000 0%, transparent 72%);
       pointer-events:none;
     }
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:520px;height:520px;
+      right:-160px;bottom:-200px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(230,201,138,.20),transparent 70%);
+      pointer-events:none;
+    }
     .hero-grid{
       position:relative;
+      z-index:1;
+      max-width:820px;
     }
     .hero .eyebrow{color:var(--gold-light)}
     .hero h1{
@@ -253,8 +264,8 @@
       display:flex;flex-wrap:wrap;gap:.55rem;
       margin:2rem 0 0;padding:0;list-style:none;
     }
-    .hero-tags li,
-    .hero-tags span{
+    .hero-tags li{
+      display:inline-flex;align-items:center;gap:.4rem;
       padding:.42rem .9rem;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
@@ -262,6 +273,83 @@
       font-size:.79rem;font-weight:500;letter-spacing:.02em;
       color:#d8e5f5;
     }
+    .hero-tags li::before{
+      content:"";
+      width:6px;height:6px;border-radius:50%;
+      background:var(--gold-light);
+      box-shadow:0 0 8px rgba(230,201,138,.85);
+    }
+
+    /* ============================================================
+       QUICK ACCESS STRIP (student-friendly)
+       ============================================================ */
+    .quick-access{
+      position:relative;
+      z-index:2;
+      margin-top:-48px;
+    }
+    .quick-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:14px;
+      padding:clamp(16px, 2vw, 22px);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-md);
+    }
+    .quick-card{
+      display:flex;flex-direction:column;
+      padding:18px 18px 16px;
+      border-radius:14px;
+      background:linear-gradient(180deg,#fbfcfe 0%,#f4f7fb 100%);
+      border:1px solid var(--line);
+      text-decoration:none;color:inherit;
+      transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .quick-card::before{
+      content:"";
+      position:absolute;inset:0 0 auto;
+      height:3px;
+      background:linear-gradient(90deg,var(--gold),var(--gold-light));
+      opacity:.7;
+      transition:opacity .2s ease;
+    }
+    .quick-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(192,144,47,.42);
+      box-shadow:var(--shadow-sm);
+      background:linear-gradient(180deg,#fff 0%,#fbfcfe 100%);
+    }
+    .quick-card:hover::before{opacity:1}
+    .quick-icon{
+      display:grid;place-items:center;
+      width:40px;height:40px;
+      margin-bottom:10px;
+      border-radius:11px;
+      font-size:1.1rem;line-height:1;
+      background:var(--gold-soft);
+      border:1px solid rgba(192,144,47,.22);
+    }
+    .quick-card h3{
+      margin:0 0 .25rem;
+      font-size:.93rem;font-weight:650;
+      color:var(--navy-900);letter-spacing:-.005em;
+      line-height:1.3;
+    }
+    .quick-card p{
+      margin:0;font-size:.78rem;line-height:1.5;
+      color:var(--muted);
+    }
+    .quick-card .arrow{
+      margin-top:auto;padding-top:.7rem;
+      font-size:.78rem;font-weight:650;
+      color:var(--gold);
+      transition:transform .18s ease;
+    }
+    .quick-card:hover .arrow{transform:translateX(4px)}
 
     /* ============================================================
        BUTTONS
@@ -297,7 +385,6 @@
       border-color:rgba(192,144,47,.6);
       box-shadow:var(--shadow-sm);
     }
-    /* on dark surfaces */
     .hero .button.primary{background:#fff;color:var(--navy-900)}
     .hero .button.primary:hover{background:#fdf8ee}
     .hero .button.secondary{
@@ -403,25 +490,77 @@
     }
 
     /* ============================================================
-       TEACHING CARDS
+       TEACHING CARDS — enhanced
        ============================================================ */
     .cards{
       display:grid;
       grid-template-columns:repeat(auto-fit, minmax(258px, 1fr));
       gap:20px;
     }
-    .card-link{
+    .subject-card{
+      position:relative;
       display:flex;flex-direction:column;height:100%;
-      color:inherit;text-decoration:none;
+      padding:24px 24px 20px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+      text-decoration:none;color:inherit;
+      overflow:hidden;
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
-    .card-link span{
-      margin-top:auto;
-      padding-top:1rem;
-      font-size:.86rem;font-weight:650;
+    .subject-card::before{
+      content:"";
+      position:absolute;inset:0 0 auto;
+      height:4px;
+      background:linear-gradient(90deg,var(--gold),var(--gold-light));
+      opacity:.55;
+      transition:opacity .22s ease;
+    }
+    .subject-card:hover{
+      transform:translateY(-4px);
+      box-shadow:var(--shadow-md);
+      border-color:rgba(192,144,47,.4);
+    }
+    .subject-card:hover::before{opacity:1}
+    .subject-icon{
+      display:grid;place-items:center;
+      width:52px;height:52px;
+      margin-bottom:14px;
+      border-radius:14px;
+      font-size:1.4rem;line-height:1;
+      color:var(--navy-800);
+      background:linear-gradient(145deg,#fdf6e6,var(--gold-soft));
+      border:1px solid rgba(192,144,47,.25);
+      box-shadow:0 8px 18px -12px rgba(192,144,47,.6);
+    }
+    .subject-card h3{
+      margin:0 0 .35rem;
+      font-size:1.03rem;font-weight:650;letter-spacing:-.005em;
+      color:var(--navy-900);line-height:1.3;
+    }
+    .subject-card p{
+      margin:0;font-size:.9rem;line-height:1.6;color:var(--slate);
+    }
+    .subject-card .tag{
+      display:inline-flex;align-items:center;gap:.3rem;
+      align-self:flex-start;
+      margin:0 0 .7rem;
+      padding:.18rem .55rem;
+      border-radius:999px;
+      background:var(--gold-soft);
+      border:1px solid rgba(192,144,47,.28);
+      font-size:.63rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+      color:#8a6120;
+    }
+    .subject-card .go{
+      margin-top:auto;padding-top:1rem;
+      display:flex;align-items:center;gap:.35rem;
+      font-size:.84rem;font-weight:650;
       color:var(--gold);
       transition:transform .18s ease;
     }
-    .card-link:hover span{transform:translateX(4px)}
+    .subject-card:hover .go{transform:translateX(4px)}
 
     /* ============================================================
        CONTACT
@@ -490,6 +629,7 @@
        ============================================================ */
     @media (max-width: 1040px){
       .nav-links a{padding:.5rem .55rem;font-size:.84rem}
+      .quick-grid{grid-template-columns:repeat(2, minmax(0,1fr))}
     }
 
     @media (max-width: 980px){
@@ -522,10 +662,12 @@
       .scholar-panel,
       .slideshare-panel{padding:22px}
       .footer-inner{justify-content:flex-start}
+      .quick-access{margin-top:-32px}
+      .quick-grid{grid-template-columns:1fr;gap:10px}
     }
 
     @media (max-width: 480px){
-      .hero-tags li,.hero-tags span{font-size:.74rem;padding:.38rem .75rem}
+      .hero-tags li{font-size:.74rem;padding:.38rem .75rem}
       .button{width:100%}
       .hero-actions .button{width:100%}
     }
@@ -572,21 +714,51 @@
   <!-- ================= HERO ================= -->
   <section class="hero" id="home">
     <div class="container hero-grid">
-      <div>
-        <p class="eyebrow" data-en="Faculty Profile · Civil Engineering" data-mr="प्राध्यापक परिचय · स्थापत्य अभियांत्रिकी" data-hi="संकाय प्रोफ़ाइल · सिविल इंजीनियरिंग">Faculty Profile · Civil Engineering</p>
-        <h1>Dr. Darshankumar Patel</h1>
-        <p class="role">Assistant Professor</p>
-        <p class="hero-copy" data-en="Teaching, research and applied innovation across urban planning, transportation planning, GIS mapping, accessibility and sustainable infrastructure." data-mr="नगर नियोजन, वाहतूक नियोजन, GIS मॅपिंग, सुलभता आणि शाश्वत पायाभूत सुविधांमध्ये अध्यापन, संशोधन आणि उपयोजित नवकल्पना." data-hi="शहरी नियोजन, परिवहन नियोजन, GIS मैपिंग, सुगम्यता और सतत अवसंरचना में शिक्षण, अनुसंधान और अनुप्रयुक्त नवाचार।">Teaching, research and applied innovation across urban planning, transportation planning, GIS mapping, accessibility and sustainable infrastructure.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#publications">Explore Publications</a>
-          <a class="button secondary" href="https://scholar.google.com/citations?user=9vklDj0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar ↗</a>
-        </div>
-        <ul class="hero-tags">
-          <li>Urban Planning</li>
-          <li>Transportation Planning</li>
-          <li>GIS Mapping</li>
-          <li>Accessibility Mapping</li>
-        </ul>
+      <p class="eyebrow" data-en="Faculty Profile · Civil Engineering" data-mr="प्राध्यापक परिचय · स्थापत्य अभियांत्रिकी" data-hi="संकाय प्रोफ़ाइल · सिविल इंजीनियरिंग">Faculty Profile · Civil Engineering</p>
+      <h1>Dr. Darshankumar Patel</h1>
+      <p class="role">Assistant Professor</p>
+      <p class="hero-copy" data-en="Teaching, research and applied innovation across urban planning, transportation planning, GIS mapping, accessibility and sustainable infrastructure." data-mr="नगर नियोजन, वाहतूक नियोजन, GIS मॅपिंग, सुलभता आणि शाश्वत पायाभूत सुविधांमध्ये अध्यापन, संशोधन आणि उपयोजित नवकल्पना." data-hi="शहरी नियोजन, परिवहन नियोजन, GIS मैपिंग, सुगम्यता और सतत अवसंरचना में शिक्षण, अनुसंधान और अनुप्रयुक्त नवाचार।">Teaching, research and applied innovation across urban planning, transportation planning, GIS mapping, accessibility and sustainable infrastructure.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#teaching">Explore Study Resources</a>
+        <a class="button secondary" href="https://scholar.google.com/citations?user=9vklDj0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar ↗</a>
+      </div>
+      <ul class="hero-tags">
+        <li>Urban Planning</li>
+        <li>Transportation Planning</li>
+        <li>GIS Mapping</li>
+        <li>Accessibility Mapping</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= QUICK ACCESS STRIP (student-friendly) ================= -->
+  <section class="quick-access" aria-label="Quick access for students">
+    <div class="container">
+      <div class="quick-grid" data-reveal>
+        <a class="quick-card" href="#dbatu-papers">
+          <span class="quick-icon" aria-hidden="true">📄</span>
+          <h3>DBATU Question Papers</h3>
+          <p>Semester-wise B.Tech CE papers</p>
+          <span class="arrow">Jump to section →</span>
+        </a>
+        <a class="quick-card" href="#virtual-labs">
+          <span class="quick-icon" aria-hidden="true">🧪</span>
+          <h3>Virtual Labs</h3>
+          <p>Simulation-based experiments</p>
+          <span class="arrow">Jump to section →</span>
+        </a>
+        <a class="quick-card" href="#gate-material">
+          <span class="quick-icon" aria-hidden="true">🎯</span>
+          <h3>GATE Study Material</h3>
+          <p>Notes, papers &amp; references</p>
+          <span class="arrow">Jump to section →</span>
+        </a>
+        <a class="quick-card" href="#presentations">
+          <span class="quick-icon" aria-hidden="true">📊</span>
+          <h3>SlideShare</h3>
+          <p>Lecture presentations &amp; notes</p>
+          <span class="arrow">Jump to section →</span>
+        </a>
       </div>
     </div>
   </section>
@@ -626,51 +798,58 @@
       <div class="section-heading" data-reveal>
         <p class="eyebrow">Teaching &amp; Learning</p>
         <h2>Civil Engineering Knowledge Hub</h2>
-        <p>A growing collection of learning resources, practical guidance and interactive tools for students.</p>
+        <p>A growing collection of learning resources, practical guidance and interactive tools for students. Pick a subject to open its notes, PDFs and reference material.</p>
       </div>
 
       <div class="cards" data-reveal>
-        <a class="topic-card card-link" href="resources/transportation-planning.html">
-          <div class="topic-icon" aria-hidden="true">🚦</div>
+        <a class="subject-card" href="resources/transportation-planning.html">
+          <span class="tag">Core Subject</span>
+          <div class="subject-icon" aria-hidden="true">🚦</div>
           <h3>Transportation Planning</h3>
           <p>Urban transport, traffic engineering, travel demand and accessibility.</p>
-          <span>Open subject page →</span>
+          <span class="go">Open subject page →</span>
         </a>
-        <a class="topic-card card-link" href="resources/urban-planning.html">
-          <div class="topic-icon" aria-hidden="true">🏙</div>
+        <a class="subject-card" href="resources/urban-planning.html">
+          <span class="tag">Core Subject</span>
+          <div class="subject-icon" aria-hidden="true">🏙</div>
           <h3>Urban Planning</h3>
           <p>Land use, urban development, planning principles and city systems.</p>
-          <span>Open subject page →</span>
+          <span class="go">Open subject page →</span>
         </a>
-        <a class="topic-card card-link" href="resources/gis-mapping.html">
-          <div class="topic-icon" aria-hidden="true">🌐</div>
+        <a class="subject-card" href="resources/gis-mapping.html">
+          <span class="tag">Tool-Based</span>
+          <div class="subject-icon" aria-hidden="true">🌐</div>
           <h3>GIS &amp; Mapping</h3>
           <p>Geospatial concepts, mapping workflows and accessibility analysis.</p>
-          <span>Open subject page →</span>
+          <span class="go">Open subject page →</span>
         </a>
-        <a class="topic-card card-link" href="resources/construction-materials.html">
-          <div class="topic-icon" aria-hidden="true">🧱</div>
+        <a class="subject-card" href="resources/construction-materials.html">
+          <span class="tag">Lab Oriented</span>
+          <div class="subject-icon" aria-hidden="true">🧱</div>
           <h3>Construction Materials</h3>
           <p>Concrete, sustainable materials and construction technology.</p>
-          <span>Open subject page →</span>
+          <span class="go">Open subject page →</span>
         </a>
-        <a class="topic-card card-link" href="resources/environmental-engineering.html">
-          <div class="topic-icon" aria-hidden="true">💧</div>
+        <a class="subject-card" href="resources/environmental-engineering.html">
+          <span class="tag">Core Subject</span>
+          <div class="subject-icon" aria-hidden="true">💧</div>
           <h3>Environmental Engineering</h3>
           <p>Environmental pollution, water quality, wastewater treatment, solid waste management and environmental sustainability.</p>
-          <span>Open subject page →</span>
+          <span class="go">Open subject page →</span>
         </a>
-        <a class="topic-card card-link" href="resources/infrastructure-engineering.html">
-          <div class="topic-icon" aria-hidden="true">🏗</div>
+        <a class="subject-card" href="resources/infrastructure-engineering.html">
+          <span class="tag">Advanced</span>
+          <div class="subject-icon" aria-hidden="true">🏗</div>
           <h3>Infrastructure Engineering</h3>
           <p>Planning, design, construction and maintenance of civil infrastructure systems including roads, bridges, water supply and urban utilities.</p>
-          <span>Open subject page →</span>
+          <span class="go">Open subject page →</span>
         </a>
-        <a class="topic-card card-link" href="resources/artificial-intelligence.html">
-          <div class="topic-icon" aria-hidden="true">🤖</div>
+        <a class="subject-card" href="resources/artificial-intelligence.html">
+          <span class="tag">Emerging</span>
+          <div class="subject-icon" aria-hidden="true">🤖</div>
           <h3>Artificial Intelligence</h3>
           <p>AI fundamentals, machine learning applications, intelligent transportation systems and data-driven decision making in civil engineering.</p>
-          <span>Open subject page →</span>
+          <span class="go">Open subject page →</span>
         </a>
       </div>
     </div>
@@ -773,7 +952,6 @@
 </footer>
 
 <script>
-  /* Progressive scroll-reveal — purely presentational, safe to fail. */
   (function () {
     var items = document.querySelectorAll('[data-reveal]');
     if (!items.length) return;
