@@ -203,7 +203,7 @@
     .hero{
       position:relative;
       overflow:hidden;
-      padding-block:clamp(56px, 8vw, 104px) clamp(96px, 11vw, 132px);
+      padding-block:clamp(56px, 8vw, 104px);
       color:#fff;
       background:
         radial-gradient(900px 500px at 8% -12%, rgba(74,138,214,.38), transparent 62%),
@@ -223,10 +223,6 @@
     }
     .hero-grid{
       position:relative;
-      display:grid;
-      grid-template-columns:minmax(0,1.35fr) minmax(0,.72fr);
-      gap:clamp(32px, 5vw, 64px);
-      align-items:center;
     }
     .hero .eyebrow{color:var(--gold-light)}
     .hero h1{
@@ -265,115 +261,6 @@
       background:rgba(255,255,255,.07);
       font-size:.79rem;font-weight:500;letter-spacing:.02em;
       color:#d8e5f5;
-    }
-
-    .profile-card{
-      position:relative;
-      padding:34px 28px;
-      border-radius:var(--radius-lg);
-      text-align:center;
-      color:#fff;
-      background:linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.05));
-      border:1px solid rgba(255,255,255,.18);
-      backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px);
-      box-shadow:0 34px 70px -36px rgba(0,0,0,.85);
-    }
-    .avatar{
-      display:grid;place-items:center;
-      width:96px;height:96px;margin:0 auto 20px;
-      border-radius:50%;
-      font-family:var(--serif);font-size:2rem;font-weight:600;
-      color:var(--navy-900);
-      background:linear-gradient(145deg,#f7e3bb,var(--gold));
-      box-shadow:0 16px 34px -16px rgba(192,144,47,.95);
-    }
-    .profile-card h2{
-      font-family:var(--serif);
-      font-size:1.35rem;font-weight:600;letter-spacing:-.01em;
-      margin:0 0 .3rem;color:#fff;
-    }
-    .profile-card > p{margin:0;font-size:.92rem;color:rgba(226,237,249,.78)}
-    .profile-card .institution{
-      margin:.9rem 0 1.2rem;
-      font-size:.9rem;line-height:1.6;
-      color:#c8d8ea;
-    }
-    .profile-card a{
-      display:inline-block;
-      font-size:.88rem;font-weight:600;
-      color:var(--gold-light);
-      text-decoration:none;
-      border-bottom:1px solid rgba(230,201,138,.45);
-      padding-bottom:1px;
-      word-break:break-word;
-    }
-    .profile-card a:hover{color:#fff;border-bottom-color:#fff}
-
-       /* ============================================================
-       ACHIEVEMENTS BAND
-       ============================================================ */
-    .achievements-band{position:relative;z-index:2;margin-top:-58px}
-
-    .achievements-panel{
-      padding:clamp(22px, 3vw, 32px);
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:var(--radius-lg);
-      box-shadow:var(--shadow-md);
-    }
-    .achievements-header{
-      display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
-      gap:12px;margin-bottom:22px;
-    }
-    .achievements-header h2{
-      margin:.35rem 0 0;
-      font-family:var(--serif);
-      font-size:clamp(1.3rem, 2.2vw, 1.7rem);
-      font-weight:600;line-height:1.15;letter-spacing:-.01em;
-      color:var(--navy-900);
-    }
-
-    .achievement-grid{
-      display:grid;
-      grid-template-columns:repeat(7, minmax(0,1fr));
-      gap:12px;
-    }
-    .achievement-card{
-      position:relative;
-      padding:18px 14px 16px;
-      border-radius:14px;
-      text-align:center;
-      background:linear-gradient(180deg,#fbfcfe 0%,#f3f6fa 100%);
-      border:1px solid var(--line);
-      overflow:hidden;
-      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-    .achievement-card::before{
-      content:"";
-      position:absolute;inset:0 0 auto;
-      height:3px;
-      background:linear-gradient(90deg,var(--gold),var(--gold-light));
-      opacity:.55;
-      transition:opacity .2s ease;
-    }
-    .achievement-card:hover{
-      transform:translateY(-3px);
-      border-color:rgba(192,144,47,.38);
-      box-shadow:var(--shadow-sm);
-    }
-    .achievement-card:hover::before{opacity:1}
-    .achievement-card strong{
-      display:block;
-      font-family:var(--serif);
-      font-size:clamp(1.4rem, 2.4vw, 1.9rem);
-      font-weight:600;line-height:1.1;letter-spacing:-.02em;
-      color:var(--navy-800);
-    }
-    .achievement-card span{
-      display:block;margin-top:.45rem;
-      font-size:.68rem;font-weight:500;line-height:1.45;
-      color:var(--muted);
     }
 
     /* ============================================================
@@ -626,22 +513,7 @@
       .nav-links a{padding:.72rem .8rem;font-size:.92rem}
       .language-select{margin-left:0}
 
-      .hero-grid{grid-template-columns:1fr;gap:38px}
-      .profile-card{max-width:420px;margin-inline:auto}
       .contact-grid{grid-template-columns:1fr}
-    }
-
-       @media (max-width: 1040px){
-      .achievement-grid{grid-template-columns:repeat(4, minmax(0,1fr))}
-    }
-    @media (max-width: 760px){
-      .achievements-band{margin-top:-40px}
-      .achievement-grid{grid-template-columns:repeat(3, minmax(0,1fr))}
-    }
-    @media (max-width: 560px){
-      .achievement-grid{grid-template-columns:repeat(2, minmax(0,1fr));gap:10px}
-      .achievement-card{padding:16px 10px 14px}
-      .achievement-card span{font-size:.64rem}
     }
 
     @media (max-width: 640px){
@@ -715,59 +587,6 @@
           <li>GIS Mapping</li>
           <li>Accessibility Mapping</li>
         </ul>
-      </div>
-
-      <aside class="profile-card" aria-label="Profile summary">
-        <div class="avatar" aria-hidden="true">DP</div>
-        <h2>Dr. Darshankumar Patel</h2>
-        <p>Assistant Professor</p>
-        <p class="institution">Shri Vile Parle Kelavani Mandal's<br>Institute of Technology, Dhule</p>
-        <a href="mailto:darshptl12354@gmail.com">darshptl12354@gmail.com</a>
-      </aside>
-    </div>
-  </section>
-
-   <!-- ================= ACHIEVEMENTS ================= -->
-  <section class="achievements-band" aria-labelledby="achievements-title">
-    <div class="container">
-      <div class="achievements-panel">
-        <div class="achievements-header">
-          <div>
-            <p class="eyebrow">Achievements</p>
-            <h2 id="achievements-title">Academic &amp; Professional Milestones</h2>
-          </div>
-        </div>
-
-        <div class="achievement-grid">
-          <div class="achievement-card">
-            <strong>46</strong>
-            <span>FDP / STTP / Workshop / Seminar / Training / Conference Attended</span>
-          </div>
-          <div class="achievement-card">
-            <strong>02</strong>
-            <span>No. of Patents &amp; Copyrights</span>
-          </div>
-          <div class="achievement-card">
-            <strong>05</strong>
-            <span>Total No. of Books / Book Chapters</span>
-          </div>
-          <div class="achievement-card">
-            <strong>25+</strong>
-            <span>No. of Paper Publications in Conference / Journals</span>
-          </div>
-          <div class="achievement-card">
-            <strong>21</strong>
-            <span>Certification Courses Attended</span>
-          </div>
-          <div class="achievement-card">
-            <strong>12</strong>
-            <span>No. of Activities Organized</span>
-          </div>
-          <div class="achievement-card">
-            <strong>22</strong>
-            <span>Certification Count</span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
